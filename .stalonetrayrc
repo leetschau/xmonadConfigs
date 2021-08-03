@@ -1,0 +1,25 @@
+decorations none
+transparent false
+dockapp_mode none
+
+# put tray at the bottom-right corner of the screen:
+# geometry 10x1-4-1
+# put tray at the upper-right corner of the screen:
+geometry 10x1-4+1
+
+#max_geometry 5x1-325-10
+background "#000000"
+kludges force_icons_size
+
+# make icons grow from right to left:
+icon_gravity E
+grow_gravity W
+
+icon_size 18
+
+sticky true
+#window_strut none
+window_type dock
+window_layer bottom
+#no_shrink false
+skip_taskbar true

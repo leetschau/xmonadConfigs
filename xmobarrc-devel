@@ -1,0 +1,19 @@
+Config { overrideRedirect = False
+       , font     = "xft:iosevka-10"
+       , fgColor  = "#f8f8f2"
+       , position = TopW L 85
+       , commands = [ Run Weather "ZBAA"
+                        [ "--template", "<station>: <tempC>°C"
+                        , "-L", "0"
+                        , "-H", "35"
+                        , "--low"   , "lightblue"
+                        , "--normal", "#f8f8f2"
+                        , "--high"  , "orange"
+                        ] 36000
+                    , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 300
+                    , Run XMonadLog
+                    ]
+       , sepChar  = "%"
+       , alignSep = "}{"
+       , template = "%XMonadLog% } { %date%  | %ZBAA% "
+       }

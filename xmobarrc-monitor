@@ -1,0 +1,38 @@
+Config { overrideRedirect = False
+       , font     = "xft:iosevka-10"
+       , fgColor  = "#f8f8f2"
+       , position = TopW L 85
+       , commands = [ Run Weather "ZBAA"
+                        [ "--template", "<station>: <tempC>°C"
+                        , "-L", "0"
+                        , "-H", "35"
+                        , "--low"   , "lightblue"
+                        , "--normal", "#f8f8f2"
+                        , "--high"  , "orange"
+                        ] 36000
+                    , Run Cpu
+                        [ "--template", "CPU: <total>%"
+                        , "-L", "3"
+                        , "-H", "50"
+                        , "--high"  , "red"
+                        , "--normal", "green"
+                        ] 10
+                    , Run Memory ["--template", "Mem: <usedratio>%"] 10
+                    , Run Swap [] 600
+                    , Run Network "wlx08beac0758da"
+                        [ "--template", "<rx> : <tx>"
+                        , "-L", "-10"
+                        , "-H", "10240"
+                        , "-S", "True"
+                        , "--normal", "white"
+                        , "--high", "yellow"
+                        , "--low", "white"
+                        ] 10
+                    , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M:%S</fc>" "date" 10
+                    , Run DiskIO [("/", "Root: <read>,<write>"), ("sda2", "Home: <read>,<write>")] [] 10
+                    , Run XMonadLog
+                    ]
+       , sepChar  = "%"
+       , alignSep = "}{"
+       , template = "%XMonadLog% } %cpu% | %memory% | %swap% | %diskio% | %ZBAA% | %date% { %wlx08beac0758da% "
+       }

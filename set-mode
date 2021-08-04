@@ -1,0 +1,25 @@
+#!/bin/sh
+
+case $1 in
+  devel)
+    if [ -f "$3/xmobarrc" ]; then
+      mv "$3/xmobarrc" "$3/xmobarrc.bak"
+    fi
+    ln "$2/xmobarrc-devel" "$3/xmobarrc"
+    xmonad --recompile
+    xmonad --restart
+    ;;
+  monitor)
+    if [ -f "$3/xmobarrc" ]; then
+      mv "$3/xmobarrc" "$3/xmobarrc.bak"
+    fi
+    ln "$2/xmobarrc-monitor" "$3/xmobarrc"
+    xmonad --recompile
+    xmonad --restart
+    ;;
+  *)
+    echo "Invalid arguments: $1"
+    echo "Usage: set-mode [devel/monitor] srcPath dstPath"
+    echo "Example: set-mode devel ~/Documents/xmonadConfig ~/.config/xmobar"
+    ;;
+esac

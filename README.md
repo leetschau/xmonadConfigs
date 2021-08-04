@@ -97,9 +97,25 @@ Make system start in text interface (runlevel 3) and restart:
 
 ## Switch between developing and monitor mode
 
-Run script `monitor-mode` to switch to *monitor* mode,
-while switch to *develop mode* with `develop-mode`.
+In *monitor mode*, many system details are provided in realtime
+at the status bar, such as CPU, memeory, disk IO, network transfer, etc,
+refreshed each second.
+They are helpful to figure out what's going on about the system.
+But if what you need is a quiet, distraction-free developing environment,
+they are nothing but noises.
 
+So the script `set-mode` provide a convenient tool to switch between
+*monitor mode* and *developing mode* by changing the configuration file
+of xmobar and restarting xmonad:
+```
+set-mode <mode-name> <source-config-path> <target-config-path>
+```
+
+For example:
+```
+set-mode devel ~/Documents/xmonadConfig ~/.config/xmobar
+set-mode monitor ~/Documents/xmonadConfig ~/.config/xmobar
+```
 
 
 

@@ -1,5 +1,6 @@
 import XMonad
 
+import System.Exit
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -16,6 +17,8 @@ import XMonad.Layout.ThreeColumns
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.InsertPosition
 
+import qualified XMonad.StackSet as W
+
 main :: IO ()
 main = xmonad
      . ewmhFullscreen
@@ -23,21 +26,28 @@ main = xmonad
      . withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) defToggleStrutsKey
      $ myConfig
 
+myTerminal = "urxvt"
 myConfig = def
-    { terminal = "urxvt"
+    { terminal = myTerminal
     , modMask = mod1Mask
     , layoutHook = myLayout
     , manageHook = myManageHook
     , normalBorderColor  = "#000000"
     , focusedBorderColor = "#00ff00"
     }
+  `removeKeys` [ (mod1Mask, xK_Return) ]
+  `additionalKeys` [ ((mod1Mask, xK_Return), spawn myTerminal) ]
   `additionalKeysP`
     [ ("M-C-s", spawn "systemctl suspend" )
-    , ("M-S-=", unGrab *> spawn "flameshot gui" )
     , ("M-S-f", spawn "firefox" )
+    , ("M-S-e", io (exitWith ExitSuccess))
+    , ("M-S-q", kill)
+    , ("<Print>", spawn "flameshot gui" )
+    , ("M-d", spawn "dmenu_run")
+    , ("M-s", windows W.swapMaster)
     ]
 
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayout = Mirror tiled ||| Full ||| tiled
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1

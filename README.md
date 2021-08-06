@@ -1,5 +1,15 @@
 # XMonad on Mint 20.1
 
+## Usage
+
+```
+ln set-mode ~/.local/bin/set-mode
+ln xmonad.hs ~/.xmonad/xmonad.hs
+ln xmobarrc-devel ~/.config/xmobar/xmobarrc
+ln .xinitrc ~/.xinitrc
+ln .stalonetrayrc  ~/.stalonetrayrc
+```
+
 ## Overview
 
 To use XMonad on Mint, there're basically 4 steps:

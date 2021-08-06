@@ -13,6 +13,7 @@ fcitx &
 copyq &
 goldendict &
 devmon &
+flameshot &
 feh --bg-fill --no-fehbg ~/Pictures/ui8VNo.webp
 
 autocutsel -fork -selection CLIPBOARD
